@@ -9,16 +9,17 @@ class Note(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class Word(db.Model):
-
     id = db.Column(db.Integer, primary_key=True)
     oldWord = db.Column(db.String(150))
     word = db.Column(db.String(150))
     meaning = db.Column(db.String(150))
     pronoun = db.Column(db.String(150))
     type = db.Column(db.String(150))
+    link = db.Column(db.String(150))
     count = db.Column(db.Integer, default=1)
     isUsed = db.Column(db.Boolean, default=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
 
     def __eq__(self, o: object) -> bool:
         if not isinstance(o, Word):
@@ -29,7 +30,7 @@ class Word(db.Model):
         return hash(self.oldWord)
 
     def __str__(self) -> str:
-        return str([self.word, self.oldWord, self.pronoun, self.type, self.count])
+        return str([self.word, self.oldWord, self.pronoun, self.type, self.count, self.link])
 
     def increaseCount(self):
         self.count += 1

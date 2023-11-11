@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% block title %}Game{% endblock %}
+{% block content %}
+    <form method="POST">
+        <h3 align="center">Add word</h3>
+        <div class="form-group">
+            <label for="word">Word English</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    name="word"
+                    placeholder="Enter word"
+            />
+        </div>
+        <div class="form-group">
+            <label for="pronoun">Meaning</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    name="meaning"
+                    placeholder="Enter meaning"
+            />
+        </div>
+        <div class="form-group">
+            <label for="pronoun">Pronoun</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    name="pronoun"
+                    placeholder="Enter pronoun"
+            />
+        </div>
+        <div class="form-group">
+            <label for="pronoun">Type</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    name="type"
+                    placeholder="Enter type"
+            />
+        </div>
+        <div class="form-group">
+            <label for="pronoun">Link</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    name="link"
+                    placeholder="Enter link"
+            />
+        </div>
+        <br/>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+{% endblock %}

@@ -4,6 +4,15 @@ async function deleteWord(wordId) {
         method: 'POST',
         body: JSON.stringify({'wordId': wordId})
     })
+    window.location.href = '/trash'
+}
+
+async function remove(wordId) {
+    console.log(wordId)
+    await fetch('/remove', {
+        method: 'POST',
+        body: JSON.stringify({'wordId': wordId})
+    })
     window.location.href = '/dictionary'
 }
 

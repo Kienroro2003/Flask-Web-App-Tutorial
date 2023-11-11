@@ -1,6 +1,11 @@
 {% extends "base.html" %} {% block title %}My dictionary{% endblock %}
 {% block content %}
+    <div class="row justify-content-between">
     <h1>My Dictionary</h1>
+    <button class="btn btn-primary">
+        <a class="text-light" href="./add"><i class="bi bi-plus-square"></i> Add</a>
+    </button>
+    </div>
     <table class="table">
         <thead>
         <tr>
@@ -22,8 +27,8 @@
                     <td>{{ word.pronoun }}</td>
                     <td>{{ word.type }}</td>
                     <td>
-                        <a href="/infor-word/{{ word.id }}">Link</a>
-                        <button type="button" class="btn btn-danger" onclick="deleteWord({{ word.id }}) ">Delete
+                        <a class="btn btn-primary" href="/infor-word/{{ word.id }}">Info</a>
+                        <button type="button" class="btn btn-danger" onclick="remove({{ word.id }}) ">Remove
                         </button>
                     </td>
                 </tr>

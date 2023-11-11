@@ -42,7 +42,7 @@ def translateWord(text):
     except TypeError:
         return None
     # newWord = f'new Word(\"{word}\", \"{meaningVietnames}\", \"{pronoun}\", Type.{typeWord.upper()}) '
-    newWord = Word(oldWord=text, word=word, meaning=meaningVietnames, pronoun=pronoun, type=typeWord)
+    newWord = Word(oldWord=text, word=word, meaning=meaningVietnames, pronoun=pronoun, type=typeWord, link=url)
     return newWord
 
 

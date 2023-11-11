@@ -1,13 +1,16 @@
 {% extends "base.html" %} {% block title %}Information{% endblock %}
 {% block content %}
     {% if word %}
-        <h1>Inforamation</h1>
-        <p>Old word: {{ word.oldWord}}</p>
-        <p>Word: {{ word.word}}</p>
-        <p>Meaning: {{ word.meaning}}</p>
-        <p>Pronoun: {{ word.pronoun}}</p>
-        <p>Count: {{ word.count}}</p>
-        <p>Type: {{ word.type}}</p>
-        <p>Used: {{ word.isUsed}}</p>
+        <h1>Information</h1>
+        <p>Old word: {{ word.oldWord }}</p>
+        <p>Word: {{ word.word }}</p>
+        <p>Meaning: {{ word.meaning }}</p>
+        <p>Pronoun: {{ word.pronoun }}</p>
+        <p>Type: {{ word.type }}</p>
+        <p>Count: {{ word.count }}</p>
+        <p>Used: {{ word.isUsed }}</p>
+        {% if word.link %}
+            <p><a href="{{ word.link }}" target="_blank">Link</a></p>
+        {% endif %}
     {% endif %}
 {% endblock %}

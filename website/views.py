@@ -1,4 +1,6 @@
 from flask import Blueprint, render_template, request, jsonify, flash, redirect, url_for
+from sqlalchemy import or_
+
 from . import db
 import json
 from flask_login import current_user, login_required
@@ -41,7 +43,19 @@ def home():
 
 
 @views.route('/delete-word', methods=['POST'])
-def delete_note():
+def delete_word():
+    word = json.loads(request.data)  # this function expects a JSON from the INDEX.js file
+    wordId = word['wordId']
+    word = Word.query.get(wordId)
+    if word:
+        if word.user_id == current_user.id:
+            db.session.delete(word)
+            db.session.commit()
+
+    return jsonify({})
+
+@views.route('/remove', methods=['POST'])
+def remove():
     word = json.loads(request.data)  # this function expects a JSON from the INDEX.js file
     wordId = word['wordId']
     word = Word.query.get(wordId)
@@ -49,7 +63,6 @@ def delete_note():
         if word.user_id == current_user.id:
             word.isUsed = False
             db.session.commit()
-
     return jsonify({})
 
 
@@ -84,3 +97,24 @@ def trash():
 
         return jsonify({})
     return render_template("trash.html", user=current_user)
+
+@views.route('/add', methods=['GET', 'POST'])
+def add():
+    if request.method == 'POST':
+        word = request.form.get('word')
+        meaning = request.form.get('meaning')
+        type = request.form.get('type')
+        pronoun = request.form.get('pronoun')
+        link = request.form.get('link')
+        newWord = Word(oldWord=word, word=word, meaning=meaning, type=type, pronoun=pronoun, link=link)
+        word = Word.query.filter(or_(Word.oldWord.like(word), Word.word.like(word))).first()
+        print(word)
+        if word:
+            flash('Word already exists.', category='error')
+        else:
+            flash('Word created!', category='success')
+            newWord.user_id = current_user.id
+            db.session.add(newWord)
+            db.session.commit()
+        render_template("add.html", user=current_user)
+    return render_template("add.html", user=current_user)
