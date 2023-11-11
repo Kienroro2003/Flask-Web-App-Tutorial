@@ -3,6 +3,7 @@ from . import db
 import json
 from flask_login import current_user, login_required
 from .models import Note
+from website.scraping_word import *
 
 views = Blueprint('views', __name__)
 
@@ -16,9 +17,23 @@ def home():
         if len(note) < 1:
             flash('Note is too short!', category='error')
         else:
-            new_note = Note(data=note, user_id=current_user.id)  #providing the schema for the note
-            db.session.add(new_note) #adding the note to the database
-            db.session.commit()
+            # new_note = Note(data=note, user_id=current_user.id)  #providing the schema for the note
+            # db.session.add(new_note) #adding the note to the database
+            # db.session.commit()
+            text = ' '.join(note.split('\r\n')).translate({ord(i): None for i in '.(),?!:+-*/@#$%^&<>'}).lower().split(' ')
+            print(text)
+            notes = current_user.notes
+            print(notes)
+            for word in text:
+                word = add(word, notes)
+                if word is not None:
+                    word.user_id = current_user.id
+                    db.session.add(word) #adding the note to the database
+                    db.session.commit()
+
+            print(notes)
+
+
             flash('Note added!', category='success')
 
     return render_template("home.html", user=current_user)
@@ -35,3 +50,7 @@ def delete_note():
             db.session.commit()
 
     return jsonify({})
+
+@views.route('/dictionary', methods=['GET', 'POST'])
+def dictionary():
+    return render_template("dictionary.html", user=current_user)
