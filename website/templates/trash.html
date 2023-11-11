@@ -14,7 +14,7 @@
         </thead>
         <tbody>
         {% for word in user.notes %}
-            {% if word.isUsed %}
+            {% if not word.isUsed %}
                 <tr>
                     <th scope="row">{{ word.id }}</th>
                     <td>{{ word.word }}</td>
@@ -22,8 +22,8 @@
                     <td>{{ word.pronoun }}</td>
                     <td>{{ word.type }}</td>
                     <td>
-                        <a href="/infor-word/{{ word.id }}">Link</a>
-                        <button type="button" class="btn btn-danger" onclick="deleteWord({{ word.id }}) ">Delete
+                        <button type="button" class="btn btn-primary" onclick="restore({{ word.id }})">Restore</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteNote({{ word.id }}) ">Delete
                         </button>
                     </td>
                 </tr>

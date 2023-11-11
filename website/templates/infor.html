@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block title %}Information{% endblock %}
+{% block content %}
+    {% if word %}
+        <h1>Inforamation</h1>
+        <p>Old word: {{ word.oldWord}}</p>
+        <p>Word: {{ word.word}}</p>
+        <p>Meaning: {{ word.meaning}}</p>
+        <p>Pronoun: {{ word.pronoun}}</p>
+        <p>Count: {{ word.count}}</p>
+        <p>Type: {{ word.type}}</p>
+        <p>Used: {{ word.isUsed}}</p>
+    {% endif %}
+{% endblock %}
