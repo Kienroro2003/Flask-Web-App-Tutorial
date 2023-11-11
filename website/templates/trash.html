@@ -5,6 +5,7 @@
         <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Old Word</th>
             <th scope="col">Word</th>
             <th scope="col">Meaning</th>
             <th scope="col">Pronoun</th>
@@ -17,11 +18,13 @@
             {% if not word.isUsed %}
                 <tr>
                     <th scope="row">{{ word.id }}</th>
+                    <th scope="row">{{ word.oldWord }}</th>
                     <td>{{ word.word }}</td>
                     <td>{{ word.meaning }}</td>
                     <td>{{ word.pronoun }}</td>
                     <td>{{ word.type }}</td>
                     <td>
+                        <a class="btn btn-primary" href="/infor-word/{{ word.id }}">Info</a>
                         <button type="button" class="btn btn-primary" onclick="restore({{ word.id }})">Restore</button>
                         <button type="button" class="btn btn-danger" onclick="deleteWord({{ word.id }}) ">Delete
                         </button>

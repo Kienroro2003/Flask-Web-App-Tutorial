@@ -99,7 +99,7 @@ def trash():
     return render_template("trash.html", user=current_user)
 
 @views.route('/add', methods=['GET', 'POST'])
-def add():
+def addWord():
     if request.method == 'POST':
         word = request.form.get('word')
         meaning = request.form.get('meaning')
@@ -118,3 +118,17 @@ def add():
             db.session.commit()
         render_template("add.html", user=current_user)
     return render_template("add.html", user=current_user)
+
+@views.route('/update/<id>', methods=['GET', 'POST'])
+def updateWord(id):
+    word = Word.query.get(int(id))
+    if request.method == 'POST':
+        print(word)
+        word.word = request.form.get('word')
+        word.meaning = request.form.get('meaning')
+        word.type = request.form.get('type')
+        word.pronoun = request.form.get('pronoun')
+        word.link = request.form.get('link')
+        db.session.commit()
+        return redirect(url_for('views.dictionary'))
+    return render_template('update.html', user=current_user, word=word)

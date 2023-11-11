@@ -25,13 +25,5 @@ async function restore(wordId) {
     window.location.href = '/trash'
 }
 
-async function infor(noteId) {
-    console.log(noteId)
-    await fetch('/infor-word', {
-        body: JSON.stringify({'noteId': noteId})
-    })
-    // window.location.href = '/infor-word'
-}
-
 
 console.log("Hello")

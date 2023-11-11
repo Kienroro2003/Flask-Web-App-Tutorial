@@ -40,8 +40,7 @@ def translateWord(text):
     try:
         meaningVietnames = translate_word(word).lower()
     except TypeError:
-        return None
-    # newWord = f'new Word(\"{word}\", \"{meaningVietnames}\", \"{pronoun}\", Type.{typeWord.upper()}) '
+        return Word(oldWord=text, word=word, pronoun=pronoun, type=typeWord, link=url, isUsed=False)
     newWord = Word(oldWord=text, word=word, meaning=meaningVietnames, pronoun=pronoun, type=typeWord, link=url)
     return newWord
 
